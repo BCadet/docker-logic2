@@ -14,8 +14,8 @@ RUN apt-get update && \
     supervisor \
     bspwm
     
-
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
+COPY ./supervisord.conf /etc/supervisord.conf
 EXPOSE 8080
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -28,9 +28,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     libgbm1 \
     libasound2 \
     libfuse2
-# COPY Logic-2.4.4-master.AppImage /Logic.AppImage
-ADD https://logic2api.saleae.com/download?os=linux /Logic.AppImage
-RUN chmod +x /Logic.AppImage
+
+
+# Download the Logic2 software
+ARG LOGIC2_VERSION=2.4.6
+ADD https://downloads.saleae.com/logic2/Logic-${LOGIC2_VERSION}-master.AppImage /Logic2.AppImage
+RUN chmod +x /Logic2.AppImage
+# RUN /Logic2.AppImage --appimage-extract
 
 CMD ["supervisord" ]
-# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y pulseview

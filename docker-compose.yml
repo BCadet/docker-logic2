@@ -1,11 +1,10 @@
 version: "3.9"
 services:
-  logic:
+  logic2:
     build: .
-    image: logic
+    image: logic2:2.4.6
     ports:
       - "8080:8080"
     privileged: true
     volumes:
-      - "./shared:/shared"
-      - "./supervisord.conf:/etc/supervisord.conf"
+      - "./shared:/root/shared"
