@@ -2,7 +2,7 @@ version: "3.9"
 services:
   logic2:
     build: .
-    image: logic2:2.4.6
+    image: ghcr.io/bcadet/docker-logic2:2.4.6
     ports:
       - "8080:8080"
     privileged: true
